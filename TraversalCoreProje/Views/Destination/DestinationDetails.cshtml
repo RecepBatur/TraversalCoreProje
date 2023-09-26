@@ -1,6 +1,6 @@
 ﻿@model EntityLayer.Concrete.Destination
 @{
-    ViewData["Title"] = "DestinaonDetails";
+    ViewData["Title"] = "DestinationDetails";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
 
@@ -172,9 +172,7 @@
                         </div>
                     </div>
                     <!--//author-card-->
-
-
-                    @await Component.InvokeAsync("_CommentList")
+                    @await Component.InvokeAsync("_CommentList", new {id=ViewBag.i})
 
                     @await Component.InvokeAsync("_AddComment")
                 </div>
