@@ -18,5 +18,10 @@ namespace EntityLayer.Concrete
         public string Description { get; set; }
         public int Capacity { get; set; }
         public bool Status { get; set; }
+        public string CoverImage { get; set; }
+        public string FirstDetails { get; set; }
+        public string SecondDetails { get; set; }
+        public string SecondImage { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }
