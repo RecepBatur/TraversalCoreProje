@@ -22,37 +22,34 @@
 	<div class="wrapper">
 		<div class="inner">
 			<img src="~/colorlib-regform-26/images/image-1.png" alt="" class="image-1">
-			<form action="">
+			<form method="post">
 				<h3>Yeni Hesap Oluşturun</h3>
 				<div class="form-holder">
 					<span class="lnr lnr-user"></span>
-					<input type="text" class="form-control" placeholder="Adınız">
+					<input type="text" name="Name" class="form-control" placeholder="Adınız">
 				</div>
 				<div class="form-holder">
 					<span class="lnr lnr-user"></span>
-					<input type="text" class="form-control" placeholder="Soyadınız">
+					<input type="text" name="Surname" class="form-control" placeholder="Soyadınız">
 				</div>
 				<div class="form-holder">
 					<span class="lnr lnr-envelope"></span>
-					<input type="text" class="form-control" placeholder="Mail Adresiniz">
+					<input type="text" name="Mail" class="form-control" placeholder="Mail Adresiniz">
 				</div>
 				<div class="form-holder">
 					<span class="lnr lnr-phone-handset"></span>
-					<input type="text" class="form-control" placeholder="Telefon Numaranız">
+					<input type="text" name="Username" class="form-control" placeholder="Kullanıcı Adınız">
 				</div>
 				<div class="form-holder">
 					<span class="lnr lnr-lock"></span>
-					<input type="password" class="form-control" placeholder="Şifreniz">
+					<input type="password" name="Password" class="form-control" placeholder="Şifreniz">
 				</div>
 				<div class="form-holder">
 					<span class="lnr lnr-lock"></span>
-					<input type="password" class="form-control" placeholder="Şifre Tekrar">
+					<input type="password" name="ConfirmPassword" class="form-control" placeholder="Şifre Tekrar">
 				</div>
-				<button href="/Login/SignUp">
+				<button>
 					<span>Kayıt Ol</span>
-				</button>
-				<button href="/Login/SignIn">
-					<span>Giriş Yap</span>
 				</button>
 			</form>
 			<img src="~/colorlib-regform-26/images/image-2.png" alt="" class="image-2">
@@ -64,3 +61,5 @@
 	<script src="~/colorlib-regform-26/js/main.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
+
+@*Şifre : 123456a/A*@
