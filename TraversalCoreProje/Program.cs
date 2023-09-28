@@ -2,13 +2,14 @@ using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using TraversalCoreProje.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //Identity configure yapýlanmasýný gerçekleþtirdik.
 builder.Services.AddDbContext<Context>();
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<Context>(); //Identity validator configure.
 
 builder.Services.AddControllersWithViews();
 
@@ -21,7 +22,7 @@ builder.Services.AddMvc(config =>
 	config.Filters.Add(new AuthorizeFilter(policy));
 });
 
-//builder.Services.AddMvc();
+builder.Services.AddMvc();
 
 var app = builder.Build();
 
