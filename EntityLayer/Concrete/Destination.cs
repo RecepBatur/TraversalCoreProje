@@ -23,5 +23,6 @@ namespace EntityLayer.Concrete
         public string SecondDetails { get; set; }
         public string SecondImage { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Reservation> Reservations { get; set; }
     }
 }
