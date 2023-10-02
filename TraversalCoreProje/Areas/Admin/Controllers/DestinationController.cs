@@ -36,7 +36,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         public IActionResult UpdateDestination(int id)
         {
             var values = destinationManager.TGetById(id);
-            return View();
+            return View(values);
         }
         [HttpPost]
         public IActionResult UpdateDestination(Destination destination)

@@ -13,7 +13,7 @@
     <br />
     <div class="form-group">
         @Html.Label("Gün/Gece")
-        <input type="date" asp-for="DayNight" class="form-control" />
+        <input type="text" asp-for="DayNight" class="form-control" />
     </div>
     <br />
     <div class="form-group">
@@ -49,6 +49,11 @@
     <div class="form-group">
         @Html.Label("Detay 2")
         <textarea cols="30" rows="5" type="text" asp-for="SecondDetails" class="form-control"></textarea>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Açıklama")
+        <textarea cols="30" rows="5" type="text" asp-for="Description" class="form-control"></textarea>
     </div>
     <br />
     <button class="btn btn-outline-success">Rota Ekle</button>
