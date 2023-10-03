@@ -28,7 +28,7 @@
             <td>@item.Name @item.Surname</td>
             <td>@item.UserName</td>
             <td>@item.Email</td>
-            <td><a class="btn btn-danger" href="javascript:void(0);" onclick="DeleteUser(@item.Id)">Sil</a></td>
+            <td><a class="btn btn-outline-danger" href="javascript:void(0);" onclick="DeleteUser(@item.Id)">Sil</a></td>
             @*<td><a href="/Admin/User/DeleteUser/@item.Id" class="btn btn-outline-danger">Sil</a></td>*@
             <td><a href="/Admin/User/UpdateUser/@item.Id" class="btn btn-outline-success">Düzenle</a></td>
             <td><a href="/Admin/User/CommentUser/@item.Id" class="btn btn-outline-info">Yorumlar</a></td>
@@ -37,7 +37,7 @@
     }
 </table>
 
-<a href="/Admin/User/AddUser" class="btn btn-outline-primary">Yeni Kullanıcı Ekle</a>
+<a href="/Login/SignUp/" class="btn btn-outline-primary">Yeni Kullanıcı Ekle</a>
 
 
 <script>
