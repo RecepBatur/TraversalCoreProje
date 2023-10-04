@@ -7,10 +7,23 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Serilog;
+using Serilog.Events;
+using System.IO;
 using System.Xml.Linq;
 using TraversalCoreProje.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Loglama Configure
+builder.Services.AddLogging(x=>
+{
+    x.ClearProviders(); //Clear
+    x.SetMinimumLevel(LogLevel.Debug); //start
+    x.AddDebug(); //to where
+
+});
+
 
 // Add services to the container.
 //Identity configure yapýlanmasýný gerçekleþtirdik.
@@ -32,7 +45,17 @@ builder.Services.AddMvc(config =>
 
 builder.Services.AddMvc();
 
+
 var app = builder.Build();
+
+//var path = Directory.GetCurrentDirectory();
+
+//Log.Logger = new LoggerConfiguration()
+//    .Enrich.FromLogContext()
+//    .WriteTo.File($"{path}\\Logs\\Log1.txt", restrictedToMinimumLevel: LogEventLevel.Debug) // Loglarý belirtilen dosyaya yaz
+//    .CreateLogger();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
