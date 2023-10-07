@@ -34,13 +34,13 @@
 
             @if (item.Status == true)
             {
-                <td><a href="#" class="btn btn-outline-warning">Pasif Yap</a></td>
+                <td><a href="/Admin/Guide/ChangeToFalse/@item.GuideId" class="btn btn-outline-warning">Pasif Yap</a></td>
             }
             else
             {
-                <td><a href="#" class="btn btn-outline-info">Aktif Yap</a></td>
+                <td><a href="/Admin/Guide/ChangeToTrue/@item.GuideId" class="btn btn-outline-info">Aktif Yap</a></td>
             }
-            <td><a href="#" class="btn btn-outline-success">Düzenle</a></td>
+            <td><a href="/Admin/Guide/UpdateGuide" class="btn btn-outline-success">Düzenle</a></td>
         </tr>
     }
 </table>
