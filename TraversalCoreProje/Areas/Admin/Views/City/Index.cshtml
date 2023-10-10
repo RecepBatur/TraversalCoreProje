@@ -18,17 +18,19 @@
 <br />
 
 <div id="citylist">
-
 </div>
 <br />
 
 <div>
     <input type="text" id="txtid" placeholder="Şehir Id Değerini Giriniz" class="form-control" />
 </div>
+<br />
+<div>
+    <input type="text" id="txtcityid" placeholder="Silinecek Id Değerini Giriniz" class="form-control" />
+</div>
 
 <br />
 <div id="destinationlistbyid">
-
 </div>
 <br />
 <div>
@@ -98,6 +100,19 @@
                 let htmlstr = `<table class=table table-bordered><tr><th>Şehir Adı</th><th>Gün Gece</th><th>Fiyatı</th></tr><tr><td>${result.City}</td> <td>${result.DayNight}</td> <td>${result.Capacity}</td></tr></table>`;
 
                 $("#destinationlistbyid").html(htmlstr);
+            }
+        });
+    });
+
+    $("#btndeletecity").click(x => {
+        let id = $("#txtcityid").val();
+        $.ajax({
+            url: "/Admin/City/DeleteCity/" + id,
+            type: "post",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (funn) {
+                alert("Şehir Başarılı Bir Şekilde Silindi");
             }
         });
     });
