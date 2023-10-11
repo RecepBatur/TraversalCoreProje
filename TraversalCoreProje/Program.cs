@@ -1,10 +1,14 @@
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using BusinessLayer.Container;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using DTOLayer.DTOs.AnnouncementDTOs;
 using EntityLayer.Concrete;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Serilog;
@@ -31,8 +35,12 @@ builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<Context>(); //Identity validator configure.
 
 builder.Services.ContainerDependencies(); //Dependency Configure
+builder.Services.AddAutoMapper(typeof(Program)); //Automapper Configure
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IValidator<AnnouncementAddDto>, AnnouncementValidator>();
+
+
+builder.Services.AddControllersWithViews().AddFluentValidation();
 
 //Proje seviyesinde Authorize konfigürasyonu yaptýk.
 builder.Services.AddMvc(config =>
