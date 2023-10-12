@@ -1,4 +1,6 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
+using DTOLayer.DTOs.AnnouncementDTOs;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,27 +13,19 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
     public class AnnouncementController : Controller
     {
         private readonly IAnnouncementService _announcementService;
+        private readonly IMapper _mapper;
 
-        public AnnouncementController(IAnnouncementService announcementService)
+        public AnnouncementController(IAnnouncementService announcementService, IMapper mapper)
         {
             _announcementService = announcementService;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            List<Announcement> announcements = _announcementService.TGetList();
-            List<AnnouncementListViewModel> list = new List<AnnouncementListViewModel>();
-            foreach (var item in announcements)
-            {
-                AnnouncementListViewModel announcementListViewModel = new AnnouncementListViewModel();
+            var values = _mapper.Map<List<AnnouncementListDto>>(_announcementService.TGetList());
 
-                announcementListViewModel.Id = item.AnnouncementId;
-                announcementListViewModel.Title = item.Title;
-                announcementListViewModel.Content = item.Content;
-
-                list.Add(announcementListViewModel);
-            }
-            return View(list);
+            return View(values);
         }
         [HttpGet]
         public IActionResult AddAnnouncement()
