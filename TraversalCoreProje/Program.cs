@@ -23,6 +23,8 @@ builder.Services.AddLogging(x=>
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<Context>(); //Identity validator configure.
 
+builder.Services.AddHttpClient(); //gelen requestleri karþýlayacaðýz.
+
 builder.Services.ContainerDependencies(); //Dependency Configure
 builder.Services.AddAutoMapper(typeof(Program)); //Automapper Configure
 
