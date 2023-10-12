@@ -33,9 +33,20 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddAnnouncement(string x)
+        public IActionResult AddAnnouncement(AnnouncementAddDto announcementAddDto)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _announcementService.TAdd(new Announcement()
+                {
+                    Content = announcementAddDto.Content,
+                    Title = announcementAddDto.Title,
+                    Date = DateTime.Now,
+                });
+
+                return RedirectToAction("Index");
+            }
+            return View(announcementAddDto);
         }
     }
 }
