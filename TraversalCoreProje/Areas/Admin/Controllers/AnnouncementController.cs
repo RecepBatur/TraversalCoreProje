@@ -48,5 +48,33 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
             }
             return View(announcementAddDto);
         }
+        public IActionResult DeleteAnnouncement(int id)
+        {
+            var values = _announcementService.TGetById(id);
+            _announcementService.TDelete(values);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult UpdateAnnouncement(int id)
+        {
+            var values = _mapper.Map<AnnouncementUpdateDto>(_announcementService.TGetById(id));
+            return View(values);
+        }
+        [HttpPost]
+        public IActionResult UpdateAnnouncement(AnnouncementUpdateDto announcementUpdateDto)
+        {
+            if (ModelState.IsValid)
+            {
+                _announcementService.TUpdate(new Announcement()
+                {
+                    AnnouncementId = announcementUpdateDto.AnnouncementId,
+                    Title = announcementUpdateDto.Title,
+                    Content = announcementUpdateDto.Content,
+                    Date = Convert.ToDateTime(DateTime.Now.ToShortDateString())
+                });
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
