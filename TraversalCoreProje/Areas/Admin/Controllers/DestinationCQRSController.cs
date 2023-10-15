@@ -12,11 +12,13 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         private readonly GetAllDestinationQueryHandler _getAllDestinationQueryHandler;
         private readonly GetDestinationByIdQueryHandler _getDestinationByIdQueryHandler;
         private readonly CreateDestinationCommandHandler _createDestinationCommandHandler;
-        public DestinationCQRSController(GetAllDestinationQueryHandler getAllDestinationQueryHandler, GetDestinationByIdQueryHandler getDestinationByIdQueryHandler, CreateDestinationCommandHandler createDestinationCommandHandler)
+        private readonly RemoveDestinationCommandHandler _removeDestinationCommandHandler;
+        public DestinationCQRSController(GetAllDestinationQueryHandler getAllDestinationQueryHandler, GetDestinationByIdQueryHandler getDestinationByIdQueryHandler, CreateDestinationCommandHandler createDestinationCommandHandler, RemoveDestinationCommandHandler removeDestinationCommandHandler)
         {
             _getAllDestinationQueryHandler = getAllDestinationQueryHandler;
             _getDestinationByIdQueryHandler = getDestinationByIdQueryHandler;
             _createDestinationCommandHandler = createDestinationCommandHandler;
+            _removeDestinationCommandHandler = removeDestinationCommandHandler;
         }
 
         public IActionResult Index()
@@ -39,6 +41,11 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         public IActionResult AddDestination(CreateDestinationCommand command)
         {
             _createDestinationCommandHandler.Handle(command);
+            return RedirectToAction("Index");
+        }
+        public IActionResult DeleteDestination(int id)
+        {
+            _removeDestinationCommandHandler.Handle(new RemoveDestinationCommand(id));
             return RedirectToAction("Index");
         }
     }

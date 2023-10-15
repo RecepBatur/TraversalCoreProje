@@ -22,6 +22,7 @@ builder.Services.AddLogging(x=>
 builder.Services.AddScoped<GetAllDestinationQueryHandler>(); //CQRS Configure
 builder.Services.AddScoped<GetDestinationByIdQueryHandler>(); //CQRS Configure
 builder.Services.AddScoped<CreateDestinationCommandHandler>(); //CQRS Configure
+builder.Services.AddScoped<RemoveDestinationCommandHandler>(); //CQRS Configure
 
 
 // Add services to the container.
