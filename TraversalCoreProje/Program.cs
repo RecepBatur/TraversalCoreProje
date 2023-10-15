@@ -23,6 +23,7 @@ builder.Services.AddScoped<GetAllDestinationQueryHandler>(); //CQRS Configure
 builder.Services.AddScoped<GetDestinationByIdQueryHandler>(); //CQRS Configure
 builder.Services.AddScoped<CreateDestinationCommandHandler>(); //CQRS Configure
 builder.Services.AddScoped<RemoveDestinationCommandHandler>(); //CQRS Configure
+builder.Services.AddScoped<UpdateDestinationCommandHandler>(); //CQRS Configure
 
 
 // Add services to the container.
