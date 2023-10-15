@@ -25,13 +25,13 @@
             <th>@count</th>
             <td>@item.city</td>
             <td>@item.daynight</td>
-            <td>@item.price</td>
+            <td>@item.price ₺</td>
             <td>@item.capacity</td>
             <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
-            <td><a href="#" class="btn btn-outline-success">Güncelle</a></td>
+            <td><a href="/Admin/DestinationCQRS/GetDestination/@item.id" class="btn btn-outline-success">Güncelle</a></td>
         </tr>
     }
 
 </table>
 <br />
-<a href="#" class="btn btn-outline-primary">Yeni Rota Ekle</a>
+<a href="/Admin/DestinationCQRS/AddDestination/" class="btn btn-outline-primary">Yeni Rota Ekle</a>

@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using TraversalCoreProje.CQRS.Commands.DestinationCommands;
 using TraversalCoreProje.CQRS.Handlers.DestinationHandlers;
 using TraversalCoreProje.Models;
 
@@ -19,6 +20,8 @@ builder.Services.AddLogging(x=>
 });
 
 builder.Services.AddScoped<GetAllDestinationQueryHandler>(); //CQRS Configure
+builder.Services.AddScoped<GetDestinationByIdQueryHandler>(); //CQRS Configure
+builder.Services.AddScoped<CreateDestinationCommandHandler>(); //CQRS Configure
 
 
 // Add services to the container.
