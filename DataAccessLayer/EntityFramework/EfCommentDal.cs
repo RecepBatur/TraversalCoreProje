@@ -21,5 +21,14 @@ namespace DataAccessLayer.EntityFramework
                 return c.Comments.Include(c => c.Destination).ToList();
             }
         }
+
+        public List<Comment> GetListWithDestinationAndUser(int id)
+        {
+            using (var c = new Context())
+            {
+                //Include metodu view tarafında farklı tablodan veri getirmemizi sağlıyor. Örn:AppUser table.
+                return c.Comments.Where(x=>x.DestinationId == id).Include(c => c.AppUser).ToList();
+            }
+        }
     }
 }
