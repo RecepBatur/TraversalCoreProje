@@ -57,6 +57,10 @@ builder.Services.AddMvc(config =>
 
 builder.Services.AddMvc();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Login/SignIn/"; //Eðer bir kullanýcý Authentication olmadan giriþ yapmýþsa buraya yönlendir.
+});
 
 var app = builder.Build();
 
