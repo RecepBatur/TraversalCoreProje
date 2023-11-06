@@ -23,14 +23,14 @@ namespace SignalRApiForSql.Models
         {
             await _context.Visitors.AddAsync(visitor);
             await _context.SaveChangesAsync();
-            await _hubContext.Clients.All.SendAsync("CallVisitorList", "aaa");
+            await _hubContext.Clients.All.SendAsync("ReceiveVisitorList", "GetVisitorChartList");
         }
         public List<VisitorChart> GetVisitorChartList()
         {
             List<VisitorChart> visitorCharts = new List<VisitorChart>();
             using (var command = _context.Database.GetDbConnection().CreateCommand()) //sorgu komutu oluştur dedik.
             {
-                command.CommandText = "Select * From crosstab\r\n(\r\n\t'Select \"VisitDate\", \"City\", \"CityVisitCount\"\r\n\tFrom \"Visitors\"\r\n\tOrder By 1,2'\r\n) AS ct(\"VisitDate\" date, City1 int, City2 int, City3 int, City4 int, City5 int);"; //sorgu buradan gelecek
+                command.CommandText = "Select tarih,[1],[2],[3],[4],[5] from (select[City],CityVisitCount,Cast([VisitDate] as\r\nDate) as tarih from Visitors) as visitTable Pivot (Sum(CityVisitCount) for City in([1],[2],[3],[4],[5])) as\r\npivottable order by tarih asc"; //sorgu buradan gelecek
                 command.CommandType = System.Data.CommandType.Text; //gönderilen sorgu text türünde(yani query türünde) olsun dedik.
                 _context.Database.OpenConnection();
                 using (var reader = command.ExecuteReader())
@@ -41,7 +41,15 @@ namespace SignalRApiForSql.Models
                         visitorChart.VisitDate = reader.GetDateTime(0).ToShortDateString();
                         Enumerable.Range(1, 5).ToList().ForEach(x => //her bir şehir için verileri basacak.
                         {
-                            visitorChart.Counts.Add(reader.GetInt32(x));
+                            if (DBNull.Value.Equals(reader[x]))
+                            {
+                                visitorChart.Counts.Add(0);
+                            }
+                            else
+                            {
+                                visitorChart.Counts.Add(reader.GetInt32(x));
+                            }
+
                         });
                         visitorCharts.Add(visitorChart);
                     }
