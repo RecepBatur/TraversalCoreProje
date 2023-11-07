@@ -84,6 +84,7 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         public async Task<IActionResult> AssignRole(int id)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
+            TempData["Userid"] = user.Id;
             var roles = _roleManager.Roles.ToList();
             var userRoles = await _userManager.GetRolesAsync(user);
             List<RoleAssingnViewModel> roleAssingnViewModels = new List<RoleAssingnViewModel>();
@@ -96,6 +97,25 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
                 roleAssingnViewModels.Add(model);
             }
             return View(roleAssingnViewModels);
+        }
+        [HttpPost]
+        [Route("AssignRole/{id}")]
+        public async Task<IActionResult> AssignRole(List<RoleAssingnViewModel> model)
+        {
+            var userId = (int)TempData["userid"];
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+            foreach (var item in model)
+            {
+                if (item.RoleExist)
+                {
+                    await _userManager.AddToRoleAsync(user, item.RoleName);
+                }
+                else
+                {
+                    await _userManager.RemoveFromRoleAsync(user, item.RoleName);
+                }
+            }
+            return RedirectToAction("UserList");
         }
     }
 }
