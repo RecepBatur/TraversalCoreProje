@@ -23,18 +23,21 @@ namespace TraversalCoreProje.Areas.Member.Controllers
 
         public async Task<IActionResult> MyCurrentReservation()
         {
+            ViewBag.v1 = "Aktif Rezervasyonlar";
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             var valuesList = reservationManager.GetListWithReservationByAccepted(values.Id);
             return View(valuesList);
         }
         public async Task<IActionResult> MyOldReservation()
         {
+            ViewBag.v1 = "Geçmiş Rezervasyonlar";
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             var valuesList = reservationManager.GetListWithReservationByPrevious(values.Id);
             return View(valuesList);
         }
         public async Task<IActionResult> MyApprovalReservation()
         {
+            ViewBag.v1 = "Onay Bekleyen Rezervasyonlar";
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             var valuesList = reservationManager.GetListWithReservationByWaitApproval(values.Id);
             return View(valuesList);
@@ -42,6 +45,8 @@ namespace TraversalCoreProje.Areas.Member.Controllers
         [HttpGet]
         public IActionResult NewReservation()
         {
+            ViewBag.v1 = "Yeni Rezervasyon Sayfası";
+
             List<SelectListItem> values = (from x in destinationManager.TGetList()
                                            select new SelectListItem
                                            {
@@ -60,6 +65,10 @@ namespace TraversalCoreProje.Areas.Member.Controllers
             p.Status = "Onay Bekliyor";
             reservationManager.TAdd(p);
             return RedirectToAction("MyCurrentReservation");
+        }
+        public IActionResult Deneme()
+        {
+            return View();
         }
 
     }

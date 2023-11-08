@@ -12,6 +12,7 @@ namespace TraversalCoreProje.Areas.Member.Controllers
         DestinationManager destinationManager = new DestinationManager(new EfDestinationDal());
         public IActionResult Index()
         {
+            ViewBag.v1 = "Aktif Tur Rotalarımız";
             var values = destinationManager.TGetList();
             return View(values);
         }
