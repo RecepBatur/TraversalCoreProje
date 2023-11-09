@@ -18,6 +18,7 @@ namespace TraversalCoreProje.Areas.Member.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            ViewBag.v1 = "Profil Güncelleme Sayfası";
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             UserEditViewModel userEditViewModel = new UserEditViewModel();
 
