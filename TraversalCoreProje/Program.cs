@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -36,7 +37,7 @@ builder.Services.AddMediatR(typeof(Program)); //MediatR Configure
 // Add services to the container.
 //Identity configure yapýlanmasýný gerçekleþtirdik.
 builder.Services.AddDbContext<Context>();
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<Context>(); //Identity validator configure.
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider).AddEntityFrameworkStores<Context>(); //Identity validator configure.
 
 builder.Services.AddHttpClient(); //gelen requestleri karþýlayacaðýz.
 
