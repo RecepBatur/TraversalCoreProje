@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using TraversalCoreProje.CQRS.Commands.DestinationCommands;
 using TraversalCoreProje.CQRS.Handlers.DestinationHandlers;
 using TraversalCoreProje.Models;
@@ -55,7 +56,13 @@ builder.Services.AddMvc(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 });
 
-builder.Services.AddMvc();
+builder.Services.AddLocalization(opt =>
+{
+    opt.ResourcesPath = "Resources"; //dil dosyalarýný nerede hangi klasörde arayacak onu belirledik.
+});
+
+
+builder.Services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -89,6 +96,11 @@ app.UseAuthentication();
 app.UseRouting();
 
 app.UseAuthorization();
+
+var suppertedCultures = new[] { "en", "fr", "es", "gr", "tr", "de" }; //desteklenen dilleri yazdýk.
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(suppertedCultures[1]).AddSupportedCultures(suppertedCultures).AddSupportedCultures(suppertedCultures); //SetDefaultCulture metodu uygulamada ilgili sayfa ayaða kalktýðý zaman default olarak hangi dil ile ayaða kalktýðýný belirtir. Biz [1] yani en olarak belirledik. Daha sonrasýnda AddSupportedCultures metodu ile ilk backend tarafýna ekledik sonrada frontend yani UI tarafýna ekledik.
+
+app.UseRequestLocalization(localizationOptions);
 
 app.MapControllerRoute(
     name: "default",
