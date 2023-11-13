@@ -4,8 +4,11 @@ using EntityLayer.Concrete;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Localization;
+using System.Globalization;
 using TraversalCoreProje.CQRS.Commands.DestinationCommands;
 using TraversalCoreProje.CQRS.Handlers.DestinationHandlers;
 using TraversalCoreProje.Models;
@@ -61,6 +64,14 @@ builder.Services.AddLocalization(opt =>
     opt.ResourcesPath = "Resources"; //dil dosyalarýný nerede hangi klasörde arayacak onu belirledik.
 });
 
+//builder.Services.Configure<RequestLocalizationOptions>(options =>
+//{
+//    options.SetDefaultCulture("tr");
+//    options.AddSupportedUICultures("en", "fr", "es", "gr", "tr", "de");
+//    options.FallBackToParentUICultures = true;
+//    options.RequestCultureProviders.Clear();
+//});
+
 
 builder.Services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
 
@@ -97,8 +108,26 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-var suppertedCultures = new[] { "en", "fr", "es", "gr", "tr", "de" }; //desteklenen dilleri yazdýk.
-var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(suppertedCultures[1]).AddSupportedCultures(suppertedCultures).AddSupportedCultures(suppertedCultures); //SetDefaultCulture metodu uygulamada ilgili sayfa ayaða kalktýðý zaman default olarak hangi dil ile ayaða kalktýðýný belirtir. Biz [1] yani en olarak belirledik. Daha sonrasýnda AddSupportedCultures metodu ile ilk backend tarafýna ekledik sonrada frontend yani UI tarafýna ekledik.
+//var suppertedCultures = new[] { "en", "fr", "es", "gr", "tr", "de" }; //desteklenen dilleri yazdýk.
+//var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(suppertedCultures[1]).AddSupportedCultures(suppertedCultures).AddSupportedCultures(suppertedCultures); //SetDefaultCulture metodu uygulamada ilgili sayfa ayaða kalktýðý zaman default olarak hangi dil ile ayaða kalktýðýný belirtir. Biz [1] yani en olarak belirledik. Daha sonrasýnda AddSupportedCultures metodu ile ilk backend tarafýna ekledik sonrada frontend yani UI tarafýna ekledik.
+var supportedCultures = new List<CultureInfo>
+{
+    new CultureInfo("en"),
+    new CultureInfo("fr"),
+    new CultureInfo("es"),
+    new CultureInfo("gr"),
+    new CultureInfo("tr"),
+    new CultureInfo("de")
+};
+
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("tr"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+    FallBackToParentUICultures = true
+};
+
 
 app.UseRequestLocalization(localizationOptions);
 
