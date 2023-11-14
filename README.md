@@ -22,6 +22,8 @@ Bu proje, çeşitli tatil rotalarının olduğu kullanıcıların bu bilgilere e
 * SignalR
 * Rol Yönetimi
 * Area
+* Loglama
+* Serialization
 * HTML
 * CSS
 * JavaScript
