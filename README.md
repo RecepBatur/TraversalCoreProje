@@ -1,5 +1,5 @@
 # TraversalCoreProje
-Bu proje, çeşitli tatil rotalarının olduğu kullanıcıların bu bilgilere erişebildiği member, admin, ve vitrin gibi üç farklı panelden oluşmaktadır.
+Bu proje, çeşitli tatil rotalarının olduğu kullanıcıların bu bilgilere erişebildiği member, admin, ve vitrin gibi üç farklı panelden oluşmaktadır. Kullanıcılar seyahat etmek istedikleri rotaları görüntüleyip, bu rotalar hakkında bilgi sahibi olduğu bu proje, tur şirketleri alanında faaliyet gösteren bir web sitesini temsil etmektedir.
 # Kullanmış Olduğum Teknolojiler Ve Yapılar
 * .Net Core 6.0
 * Entity Framework Core
